@@ -1,4 +1,4 @@
-package com.Assel.myapplication;
+package com.Assel.myapplication2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,18 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class CleaningActivity extends AppCompatActivity {
+public class RoomServiceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cleaning);
-        Button cleaningBtn = findViewById(R.id.cleaningBtn);
+        setContentView(R.layout.activity_room_service);
 
-        cleaningBtn.setOnClickListener(new View.OnClickListener() {
+        Button roomServiceBtn = findViewById(R.id.roomServiceBtn);
+
+        roomServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CleaningActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(RoomServiceActivity.this, CleaningActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.Assel.myapplication">
+    package="com.Assel.myapplication2">
 
     <application
         android:allowBackup="true"
@@ -9,23 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotalApp">
-        <activity android:name=".CleaningActivity"></activity>
-        <activity android:name=".RoomServiceActivity" />
-        <activity android:name=".MainActivity" >
-           </activity>
-        <activity android:name=".RateUsActivity" />
-        <activity android:name=".SplachActivity" >
+        <activity android:name="com.Assel.myapplication2.GuestRegisterActivity"></activity>
+        <activity android:name="com.Assel.myapplication2.CleaningActivity" />
+        <activity android:name="com.Assel.myapplication2.RoomServiceActivity" />
+        <activity android:name="com.Assel.myapplication2.MainActivity" />
+        <activity android:name="com.Assel.myapplication2.RateUsActivity" />
+        <activity android:name="com.Assel.myapplication2.SplachActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LogInActivity">
-
-        </activity>
+        <activity android:name="com.Assel.myapplication2.RegisterActivity" />
+        <activity android:name="com.Assel.myapplication2.LogInActivity"></activity>
     </application>
 
 </manifest>

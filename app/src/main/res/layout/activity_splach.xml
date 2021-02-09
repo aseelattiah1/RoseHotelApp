@@ -27,5 +27,4 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="@+id/imageView11" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

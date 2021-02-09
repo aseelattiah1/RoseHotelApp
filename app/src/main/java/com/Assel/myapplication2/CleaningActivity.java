@@ -1,4 +1,4 @@
-package com.Assel.myapplication;
+package com.Assel.myapplication2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class CleaningActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button residenceBtn = findViewById(R.id.residenceBtn);
+        setContentView(R.layout.activity_cleaning);
+        Button cleaningBtn = findViewById(R.id.cleaningBtn);
 
-        residenceBtn.setOnClickListener(new View.OnClickListener() {
+        cleaningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CleaningActivity.class);
+                Intent intent = new Intent(CleaningActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
