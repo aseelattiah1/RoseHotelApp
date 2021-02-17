@@ -7,14 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.Assel.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +26,7 @@ import java.util.UUID;
 
 public class GuestRegisterActivity extends AppCompatActivity {
 
-    EditText usernameGuestET, phoneNumberGuestET, emailGeustET, passwordGuestET;
+    TextInputEditText usernameGuestET, phoneNumberGuestET, emailGeustET, passwordGuestET;
     Button signUpGuestBtn;
     TextView haveAccountGuestTV;
 
@@ -82,7 +83,7 @@ public class GuestRegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 saveUserGuestData(username, phoneNumber, email, password);
-                Intent intent = new Intent(getApplicationContext(), RoomServiceActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ResidenceActivity.class);
                 startActivity(intent);
             }
         });

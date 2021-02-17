@@ -12,5 +12,6 @@
     <color name="colorPrimaryDark">#1d6081</color>
     <color name="colorAccent">#ffffff</color>
 
+    <color name="editTextBackground">#D6D6D6</color>
 
 </resources>

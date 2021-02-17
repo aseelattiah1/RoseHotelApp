@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dl"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -18,16 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/menu_imagview"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -197,10 +186,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view1"
-        android:layout_width="270dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        tools:ignore="MissingConstraints" />
 </androidx.drawerlayout.widget.DrawerLayout>

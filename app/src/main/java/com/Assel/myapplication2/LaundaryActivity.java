@@ -9,20 +9,25 @@ import android.widget.Button;
 
 import com.Assel.myapplication.R;
 
-public class CleaningActivity extends AppCompatActivity {
+public class LaundaryActivity extends AppCompatActivity {
+
+    Button laundar1, laundar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cleaning);
-        Button cleaningBtn = findViewById(R.id.cleaningBtn);
+        setContentView(R.layout.activity_laundary);
 
-        cleaningBtn.setOnClickListener(new View.OnClickListener() {
+        laundar1 = findViewById(R.id.laundar1);
+        laundar2 = findViewById(R.id.laundar2);
+
+        laundar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CleaningActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LaundaryActivity.this, LaundaryNumberActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 }

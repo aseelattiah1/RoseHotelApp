@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.Assel.myapplication.R;
+
 public class RateUsActivity extends AppCompatActivity {
 
     @Override
