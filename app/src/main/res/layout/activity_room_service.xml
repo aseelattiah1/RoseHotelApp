@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/room_service2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

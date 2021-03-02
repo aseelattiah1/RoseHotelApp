@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/guest_bg"
-    tools:context=".ChooseTimeForCleaningActivity">
+    tools:context=".ChooseNumberForCleaningActivity">
 
     <ImageView
         android:id="@+id/imageView26"
@@ -55,7 +55,7 @@
         android:src="@drawable/ic_drop_down" />
 
     <Button
-        android:id="@+id/saveNumberForCleanBtn"
+        android:id="@+id/button7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,15 +21,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GuestRegisterActivity extends AppCompatActivity {
 
     TextInputEditText usernameGuestET, phoneNumberGuestET, emailGeustET, passwordGuestET;
     Button signUpGuestBtn;
     TextView haveAccountGuestTV;
+
+    CountryCodePicker countryCodePicker;
 
     FirebaseAuth auth;
 
@@ -41,6 +47,7 @@ public class GuestRegisterActivity extends AppCompatActivity {
         phoneNumberGuestET = findViewById(R.id.phoneNumberGuestET);
         emailGeustET = findViewById(R.id.emailGeustET);
         passwordGuestET = findViewById(R.id.passwordGuestET);
+        countryCodePicker = findViewById(R.id.countryCodePicker);
 
         signUpGuestBtn = findViewById(R.id.signUpGuestBtn);
         haveAccountGuestTV = findViewById(R.id.haveAccountGuestTV);
@@ -56,15 +63,39 @@ public class GuestRegisterActivity extends AppCompatActivity {
                 String email = emailGeustET.getText().toString().trim();
                 String password = passwordGuestET.getText().toString().trim();
 
-                if (!(username == null && username.isEmpty())
-                        && !(phoneNumber == null && phoneNumber.isEmpty())
-                        && !(email == null && email.isEmpty())
-                        && !(password == null && password.isEmpty())) {
+                if (username == null || username.isEmpty()) {
 
-                    signInUserGuest(username, phoneNumber, email, password);
+                    Toast.makeText(GuestRegisterActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
+                } else if (phoneNumber == null || phoneNumber.isEmpty()) {
 
+                    Toast.makeText(GuestRegisterActivity.this, "Enter PhoneNumber", Toast.LENGTH_SHORT).show();
+                } else if (email == null || email.isEmpty()) {
 
+                    Toast.makeText(GuestRegisterActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                } else if (password == null || password.isEmpty()) {
+                    Toast.makeText(GuestRegisterActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (email.length() < 11) {
+                        Toast.makeText(GuestRegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                    } else if (!email.contains("@")) {
+                        Toast.makeText(GuestRegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int beginIndex = email.indexOf("@");
+                        String gmailCom = email.substring(beginIndex, email.length());
+                        if (gmailCom.equals("@gmail.com")) {
+                            if (isValidPassword(password) && password.length() >= 8) {
+                                String cCPicker = countryCodePicker.getFullNumber();
+                                signInUserGuest(username, cCPicker + phoneNumber, email, password);
+                            } else {
+                                Toast.makeText(GuestRegisterActivity.this, "Password Wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(GuestRegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                            Log.d("ttt", gmailCom);
+                        }
+                    }
                 }
+
             }
         });
 
@@ -83,7 +114,7 @@ public class GuestRegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 saveUserGuestData(username, phoneNumber, email, password);
-                Intent intent = new Intent(getApplicationContext(), ResidenceActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GuestActivity.class);
                 startActivity(intent);
             }
         });
@@ -122,4 +153,20 @@ public class GuestRegisterActivity extends AppCompatActivity {
         });
 
     }
+
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
+
 }

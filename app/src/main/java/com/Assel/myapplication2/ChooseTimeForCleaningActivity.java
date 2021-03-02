@@ -30,7 +30,8 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
 
     String startTimeClean, endTimeClean;
 
-    String username, email, roomNumber;
+    boolean isSelectedItem = false;
+    String username,email,roomNumber;
 
     FirebaseAuth auth;
 
@@ -48,22 +49,26 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String time = spinner.getItemAtPosition(i).toString();
+                isSelectedItem = true;
+             String time = spinner.getItemAtPosition(i).toString();
                 startTimeClean = time;
                 endTimeClean = getEndTime(i);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                isSelectedItem = false;
             }
         });
 
         saveNumberForCleanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (isSelectedItem) {
                     saveNumberForClean();
-
+                }else {
+                    Toast.makeText(ChooseTimeForCleaningActivity.this, "Select Time", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -72,7 +77,7 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
     private String getEndTime(int postion) {
         String endTime = null;
 
-        switch (postion) {
+        switch (postion){
             case 0:
                 endTime = "11:00";
                 break;
@@ -121,14 +126,14 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
 
     }
 
-    public void getUserData() {
+    public void getUserData(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String emailUser = snapshot1.child("email").getValue(String.class);
-                    if (emailUser.equals(auth.getCurrentUser().getEmail())) {
+                    if (emailUser.equals(auth.getCurrentUser().getEmail())){
                         username = snapshot1.child("username").getValue(String.class);
                         email = snapshot1.child("email").getValue(String.class);
                         roomNumber = snapshot1.child("roomNumber").getValue(String.class);
@@ -142,4 +147,5 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
             }
         });
     }
+
 }

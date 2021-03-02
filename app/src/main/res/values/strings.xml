@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Hotal App</string>
+    <string name="map_key" translatable="false">
+AIzaSyACSbLXPM9k9QXHTmb5SsupxpOR_WLwYis
+    </string>
     <string-array name="times">
         <item>10:00</item>
         <item>11:00</item>

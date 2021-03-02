@@ -79,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Room number"
+                android:inputType="number"
                 android:background="@color/editTextBackground"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +117,8 @@
                 android:id="@+id/emailET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Email (example@gmail.com)"
+                android:inputType="textEmailAddress"
                 android:background="@color/editTextBackground" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,8 +137,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:background="@color/editTextBackground"/>
         </com.google.android.material.textfield.TextInputLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

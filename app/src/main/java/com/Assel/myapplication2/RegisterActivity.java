@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,19 +53,46 @@ public class RegisterActivity extends AppCompatActivity {
         singUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = usernameET.getText().toString().trim();
-                String roomNumber = roomNumberET.getText().toString().trim();
-                String email = emailET.getText().toString().trim();
-                String password = passwordET.getText().toString().trim();
+                String username = usernameET.getText().toString();
+                String roomNumber = roomNumberET.getText().toString();
+                String email = emailET.getText().toString();
+                String password = passwordET.getText().toString();
 
-                if (!(username == null && username.isEmpty())
-                        && !(roomNumber == null && roomNumber.isEmpty())
-                        && !(email == null && email.isEmpty())
-                        && !(password == null && password.isEmpty())) {
-                    signInUser(username, roomNumber, email, password);
+                if (username == null || username.isEmpty()) {
+
+                    Toast.makeText(RegisterActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
+                } else if (roomNumber == null || roomNumber.isEmpty()) {
+
+                    Toast.makeText(RegisterActivity.this, "Enter RoomNumber", Toast.LENGTH_SHORT).show();
+                } else if (email == null || email.isEmpty()) {
+
+                    Toast.makeText(RegisterActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                } else if (password == null || password.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (email.length() < 11) {
+                        Toast.makeText(RegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                    } else if (!email.contains("@")) {
+                        Toast.makeText(RegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int beginIndex = email.indexOf("@");
+                        String gmailCom = email.substring(beginIndex, email.length());
+                        if (gmailCom.equals("@gmail.com")) {
+                            if (isValidPassword(password) && password.length() >= 8) {
+                                signInUser(username, roomNumber, email, password);
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Password Wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Email Wrong", Toast.LENGTH_SHORT).show();
+                            Log.d("ttt", gmailCom);
+                        }
+                    }
                 }
+
             }
         });
+
         haveAccountTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +100,6 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void signInUser(String username, String roomNumber, String email, String password) {
@@ -118,5 +147,20 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
 
 }

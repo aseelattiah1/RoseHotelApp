@@ -75,7 +75,6 @@ public class LaundaryNumberActivity extends AppCompatActivity {
 
     private void saveLaundaryNumber(int laundaryNumber) {
 
-
         String uniqueID = UUID.randomUUID().toString();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("LaundaryNumber");
 

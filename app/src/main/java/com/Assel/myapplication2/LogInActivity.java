@@ -3,6 +3,7 @@ package com.Assel.myapplication2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -45,7 +51,6 @@ public class LogInActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
 
-
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +58,14 @@ public class LogInActivity extends AppCompatActivity {
                 String passwrod = passwordLogInET.getText().toString().trim();
                 if (!(email == null && email.isEmpty())
                         && !(passwrod == null && passwrod.isEmpty())) {
-                    logInUser(email, passwrod);
+                    switch (numberUser) {
+                        case 2:
+                            showDataUserGuest(email, passwrod);
+                            break;
+                        default:
+                            showDataUserResidence(email, passwrod);
+                            break;
+                    }
                 }
             }
         });
@@ -82,7 +94,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    switch (numberUser){
+                    switch (numberUser) {
                         case 2:
                             Intent intent = new Intent(getApplicationContext(), GuestActivity.class);
                             startActivity(intent);
@@ -99,6 +111,52 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(LogInActivity.this, "Email or Password Error, try again", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showDataUserResidence(String email, String password) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    String emailUser = snapshot1.child("email").getValue(String.class);
+                    if (emailUser.equals(email)) {
+                        logInUser(email, password);
+                    } else {
+                        Toast.makeText(LogInActivity.this, "Wrong, try agin", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void showDataUserGuest(String email, String password) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UsersGuest");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    String emailUser = snapshot1.child("email").getValue(String.class);
+                    if (emailUser.equals(email)) {
+                        logInUser(email, password);
+                    } else {
+                        Toast.makeText(LogInActivity.this, "Wrong, try agin", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

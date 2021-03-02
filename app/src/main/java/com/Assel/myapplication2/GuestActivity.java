@@ -42,7 +42,6 @@ public class GuestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-
                     String emailUser = snapshot1.child("email").getValue(String.class);
                     if (emailUser.equals(auth.getCurrentUser().getEmail())) {
                         String name = snapshot1.child("username").getValue(String.class);
@@ -50,7 +49,6 @@ public class GuestActivity extends AppCompatActivity {
                         showUsernameGuestTV.setText("Username: "+name + "");
                         showPhoneNumberGuestTV.setText("Phone Number: "+phoneNumber + "");
                     }
-
                 }
             }
 
