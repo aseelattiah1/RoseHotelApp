@@ -62,7 +62,7 @@ public class ResidenceActivity extends AppCompatActivity {
         laundryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ResidenceActivity.this, LaundaryActivity.class);
+                Intent intent = new Intent(ResidenceActivity.this, LaundaryNumberActivity.class);
                 startActivity(intent);
             }
         });

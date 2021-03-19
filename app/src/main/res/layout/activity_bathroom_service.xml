@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guest_bg"
+    tools:context="com.Assel.myapplication2.BathroomServiceActivity">
+
+    <ImageView
+        android:id="@+id/towelIV"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/towel" />
+
+    <ImageView
+        android:id="@+id/toothbrushIV"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/toothbrush" />
+
+    <Button
+        android:id="@+id/towelAddBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_bg"
+        android:text="+"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/towelIV"
+        app:layout_constraintTop_toBottomOf="@+id/towelIV" />
+
+    <Button
+        android:id="@+id/towelRemoveBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_bg"
+        android:text="-"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/towelAddBtn"
+        app:layout_constraintStart_toStartOf="@+id/towelIV"
+        app:layout_constraintTop_toTopOf="@+id/towelAddBtn" />
+
+    <TextView
+        android:id="@+id/towelResultTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/towelAddBtn"
+        app:layout_constraintEnd_toStartOf="@+id/towelAddBtn"
+        app:layout_constraintStart_toEndOf="@+id/towelRemoveBtn"
+        app:layout_constraintTop_toTopOf="@+id/towelAddBtn" />
+
+    <Button
+        android:id="@+id/toothbrushAddBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_bg"
+        android:text="+"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/toothbrushIV"
+        app:layout_constraintTop_toBottomOf="@+id/toothbrushIV" />
+
+    <Button
+        android:id="@+id/toothbrushRemoveBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_bg"
+        android:text="-"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/toothbrushAddBtn"
+        app:layout_constraintStart_toStartOf="@+id/toothbrushIV"
+        app:layout_constraintTop_toTopOf="@+id/toothbrushAddBtn" />
+
+    <TextView
+        android:id="@+id/toothbrushResultTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/toothbrushAddBtn"
+        app:layout_constraintEnd_toStartOf="@+id/toothbrushAddBtn"
+        app:layout_constraintStart_toEndOf="@+id/toothbrushRemoveBtn"
+        app:layout_constraintTop_toTopOf="@+id/toothbrushAddBtn" />
+
+    <ImageView
+        android:id="@+id/shampooIV"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/towelRemoveBtn"
+        app:srcCompat="@drawable/shampoo" />
+
+    <Button
+        android:id="@+id/shampooAddBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_bg"
+        android:text="+"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/shampooIV"
+        app:layout_constraintTop_toBottomOf="@+id/shampooIV" />
+
+    <Button
+        android:id="@+id/shampooRemoveBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_bg"
+        android:text="-"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/shampooAddBtn"
+        app:layout_constraintStart_toStartOf="@+id/shampooIV"
+        app:layout_constraintTop_toTopOf="@+id/shampooAddBtn" />
+
+    <TextView
+        android:id="@+id/shampooResultTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/shampooAddBtn"
+        app:layout_constraintEnd_toStartOf="@+id/shampooAddBtn"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toEndOf="@+id/shampooRemoveBtn"
+        app:layout_constraintTop_toTopOf="@+id/shampooAddBtn" />
+
+    <Button
+        android:id="@+id/saveBathroomServiceBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Save"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:background="@drawable/btn_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shampooAddBtn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

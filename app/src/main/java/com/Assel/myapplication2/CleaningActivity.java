@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.Assel.myapplication.R;
+
 public class CleaningActivity extends AppCompatActivity {
 
     @Override
@@ -21,7 +22,6 @@ public class CleaningActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CleaningActivity.this, RegisterActivity.class);
                 startActivity(intent);
-
             }
         });
     }

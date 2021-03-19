@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,22 +103,30 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> stringList = new ArrayList<>();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String emailUser = snapshot1.child("email").getValue(String.class);
-                    if (emailUser.equals(email)) {
-                        numberUser = 1;
-                        Intent intent1 = new Intent(getApplicationContext(), ResidenceActivity.class);
-                        intent1.putExtra("email", firebaseUser.getEmail());
-                        startActivity(intent1);
+                    stringList.add(emailUser);
 
-                    } else {
-                        numberUser = 2;
-                        Intent intent = new Intent(getApplicationContext(), GuestActivity.class);
-                        intent.putExtra("email", firebaseUser.getEmail());
-                        startActivity(intent);
-
-                    }
                 }
+
+                if (stringList.contains(email)) {
+                    Log.d("ttt","true");
+                    numberUser = 1;
+                    Intent intent1 = new Intent(getApplicationContext(), ResidenceActivity.class);
+                    intent1.putExtra("email", firebaseUser.getEmail());
+                    startActivity(intent1);
+
+                } else {
+                    Log.d("ttt","false");
+                    numberUser = 2;
+                    Intent intent = new Intent(getApplicationContext(), GuestActivity.class);
+                    intent.putExtra("email", firebaseUser.getEmail());
+                    startActivity(intent);
+
+                }
+
+
             }
 
             @Override

@@ -3,8 +3,12 @@ package com.Assel.myapplication2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +35,7 @@ public class LaundaryNumberActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
 
-    String username,email,roomNumber;
+    String username, email, roomNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,11 @@ public class LaundaryNumberActivity extends AppCompatActivity {
         saveNumberBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveLaundaryNumber(number);
+                if (number > 0) {
+                    showLaundaryDialog(number);
+                } else {
+                    Toast.makeText(LaundaryNumberActivity.this, "Choose Laundary Number, Please", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -90,6 +98,8 @@ public class LaundaryNumberActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(LaundaryNumberActivity.this, "Add Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LaundaryNumberActivity.this, ResidenceActivity.class);
+                startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -99,17 +109,17 @@ public class LaundaryNumberActivity extends AppCompatActivity {
         });
     }
 
-    public void getUserData(){
+    public void getUserData() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String emailUser = snapshot1.child("email").getValue(String.class);
-                    if (emailUser.equals(auth.getCurrentUser().getEmail())){
-                         username = snapshot1.child("username").getValue(String.class);
-                         email = snapshot1.child("email").getValue(String.class);
-                         roomNumber = snapshot1.child("roomNumber").getValue(String.class);
+                    if (emailUser.equals(auth.getCurrentUser().getEmail())) {
+                        username = snapshot1.child("username").getValue(String.class);
+                        email = snapshot1.child("email").getValue(String.class);
+                        roomNumber = snapshot1.child("roomNumber").getValue(String.class);
                     }
                 }
             }
@@ -119,6 +129,28 @@ public class LaundaryNumberActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showLaundaryDialog(int number) {
+
+        final Dialog dialog = new Dialog(LaundaryNumberActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.laundary_dialog);
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setLayout(width, height);
+        TextView yourTimeForCleanTV = dialog.findViewById(R.id.laundaryNumberTV);
+        Button saveLaundaryNumberBtn = dialog.findViewById(R.id.saveLaundaryNumberBtn);
+        yourTimeForCleanTV.setText(number + "");
+
+        saveLaundaryNumberBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveLaundaryNumber(number);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }

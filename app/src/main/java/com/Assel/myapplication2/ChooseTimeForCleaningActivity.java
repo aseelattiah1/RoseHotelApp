@@ -3,11 +3,17 @@ package com.Assel.myapplication2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Assel.myapplication.R;
@@ -31,7 +37,7 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
     String startTimeClean, endTimeClean;
 
     boolean isSelectedItem = false;
-    String username,email,roomNumber;
+    String username, email, roomNumber;
 
     FirebaseAuth auth;
 
@@ -50,7 +56,7 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 isSelectedItem = true;
-             String time = spinner.getItemAtPosition(i).toString();
+                String time = spinner.getItemAtPosition(i).toString();
                 startTimeClean = time;
                 endTimeClean = getEndTime(i);
             }
@@ -65,8 +71,8 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isSelectedItem) {
-                    saveNumberForClean();
-                }else {
+                    showCleanDialog(startTimeClean);
+                } else {
                     Toast.makeText(ChooseTimeForCleaningActivity.this, "Select Time", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -77,7 +83,7 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
     private String getEndTime(int postion) {
         String endTime = null;
 
-        switch (postion){
+        switch (postion) {
             case 0:
                 endTime = "11:00";
                 break;
@@ -116,6 +122,8 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(ChooseTimeForCleaningActivity.this, "Add Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ChooseTimeForCleaningActivity.this, ResidenceActivity.class);
+                startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -126,14 +134,14 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
 
     }
 
-    public void getUserData(){
+    public void getUserData() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String emailUser = snapshot1.child("email").getValue(String.class);
-                    if (emailUser.equals(auth.getCurrentUser().getEmail())){
+                    if (emailUser.equals(auth.getCurrentUser().getEmail())) {
                         username = snapshot1.child("username").getValue(String.class);
                         email = snapshot1.child("email").getValue(String.class);
                         roomNumber = snapshot1.child("roomNumber").getValue(String.class);
@@ -146,6 +154,28 @@ public class ChooseTimeForCleaningActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showCleanDialog(String time) {
+
+        final Dialog dialog = new Dialog(ChooseTimeForCleaningActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.clean_dialog);
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setLayout(width, height);
+        TextView yourTimeForCleanTV = dialog.findViewById(R.id.yourTimeForCleanTV);
+        Button cleanSaveData = dialog.findViewById(R.id.cleanSaveData);
+        yourTimeForCleanTV.setText(time + "");
+
+        cleanSaveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveNumberForClean();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }
