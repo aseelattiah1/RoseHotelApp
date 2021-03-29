@@ -31,7 +31,7 @@ public class LogInActivity extends AppCompatActivity {
     Button logInBtn;
     TextView dontHavaAccountSignInTV;
 
-    FirebaseAuth auth;
+    public static FirebaseAuth auth;
     FirebaseUser firebaseUser;
 
     public static int numberUser;

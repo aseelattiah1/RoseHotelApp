@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/imageMealIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/shawerma" />
+
+    <TextView
+        android:id="@+id/mealNumberTV"
+        android:layout_width="12dp"
+        android:layout_height="27dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/removeMealTV"
+        app:layout_constraintEnd_toStartOf="@+id/addMealTV"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/removeMealTV"
+        app:layout_constraintTop_toTopOf="@+id/removeMealTV" />
+
+    <TextView
+        android:id="@+id/removeMealTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/circle_btn_bg"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mealNumberTV"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageMealIV" />
+
+    <TextView
+        android:id="@+id/addMealTV"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/circle_btn_bg"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mealNumberTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mealNumberTV"
+        app:layout_constraintTop_toTopOf="@+id/mealNumberTV" />
+
+    <TextView
+        android:id="@+id/nameMealTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="shawerma"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/imageMealIV"
+        app:layout_constraintTop_toTopOf="@+id/imageMealIV" />
+
+    <TextView
+        android:id="@+id/costMealTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/imageMealIV"
+        app:layout_constraintStart_toStartOf="@+id/nameMealTV"
+        app:layout_constraintTop_toBottomOf="@+id/nameMealTV" />
+</androidx.constraintlayout.widget.ConstraintLayout>

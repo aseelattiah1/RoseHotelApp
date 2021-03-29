@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ResidenceActivity extends AppCompatActivity {
 
     ImageView menuImageViewService;
-    Button roomServiceBtn, laundryBtn;
+    Button roomServiceBtn, laundryBtn,buttonRestaurantBtn,hallBtn;
     public static DrawerLayout drawerLayout;
     NavigationView navigationView;
 
@@ -41,6 +41,8 @@ public class ResidenceActivity extends AppCompatActivity {
 
         roomServiceBtn = findViewById(R.id.roomServiceBtn);
         laundryBtn = findViewById(R.id.laundryBtn);
+        buttonRestaurantBtn = findViewById(R.id.buttonRestaurantBtn);
+        hallBtn = findViewById(R.id.hallBtn);
         menuImageViewService = findViewById(R.id.menuImageViewService);
         drawerLayout = findViewById(R.id.dlRoomService);
         navigationView = findViewById(R.id.nav_viewRoomService);
@@ -50,6 +52,15 @@ public class ResidenceActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         showData();
+
+        hallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResidenceActivity.this, HallActivity.class);
+                intent.putExtra("type",0);
+                startActivity(intent);
+            }
+        });
 
         roomServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +74,14 @@ public class ResidenceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResidenceActivity.this, LaundaryNumberActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonRestaurantBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResidenceActivity.this, ResidenceResturantActivity.class);
                 startActivity(intent);
             }
         });

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.Assel.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotalApp">
-        <activity android:name="com.Assel.myapplication2.BathroomServiceActivity"></activity>
-        <activity android:name="com.Assel.myapplication2.LocationActivity"></activity>
+        <activity android:name="com.Assel.myapplication2.GuestResturantActivity"/>
+        <activity android:name="com.Assel.myapplication2.HallActivity"/>
+        <activity android:name="com.Assel.myapplication2.ResidenceResturantActivity"/>
+        <activity android:name="com.Assel.myapplication2.BathroomServiceActivity" />
+        <activity android:name="com.Assel.myapplication2.LocationActivity" />
         <activity android:name="com.Assel.myapplication2.ChooseTimeForCleaningActivity" />
         <activity android:name="com.Assel.myapplication2.LaundaryNumberActivity" />
         <activity android:name="com.Assel.myapplication2.GuestActivity" />
@@ -33,10 +41,5 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
