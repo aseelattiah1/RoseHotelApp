@@ -34,7 +34,12 @@ public class GetData {
                 getStatus = false;
             }
         });
+
+
     }
 
 
+    public static void getData2(String email) {
+        getStatus = true;
+    }
 }

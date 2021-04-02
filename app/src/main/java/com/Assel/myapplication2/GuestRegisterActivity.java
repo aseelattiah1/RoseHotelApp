@@ -63,6 +63,8 @@ public class GuestRegisterActivity extends AppCompatActivity {
                 String email = emailGeustET.getText().toString().trim();
                 String password = passwordGuestET.getText().toString().trim();
 
+
+
                 if (username == null || username.isEmpty()) {
 
                     Toast.makeText(GuestRegisterActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();

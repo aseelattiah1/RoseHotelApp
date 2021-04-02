@@ -31,4 +31,9 @@ public class LogInTest {
         });
 
     }
+
+    public static void logIn2(String email, String password) {
+        getStatus = true;
+
+    }
 }

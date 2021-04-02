@@ -49,8 +49,14 @@ public class MainActivity extends AppCompatActivity {
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LocationActivity.class);
-                startActivity(intent);
+                try{
+                    Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+                    startActivity(intent);
+                }catch (Exception X){
+                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 

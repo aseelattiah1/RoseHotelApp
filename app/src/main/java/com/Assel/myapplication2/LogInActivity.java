@@ -120,13 +120,15 @@ public class LogInActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
+
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String emailUser = snapshot1.child("email").getValue(String.class);
                     if (emailUser.equals(email)) {
                         logInUser(email, password);
                     } else {
-                        Toast.makeText(LogInActivity.this, "Wrong, try agin", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, "Wrong, try again", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -144,14 +146,19 @@ public class LogInActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    String emailUser = snapshot1.child("email").getValue(String.class);
-                    if (emailUser.equals(email)) {
-                        logInUser(email, password);
-                    } else {
-                        Toast.makeText(LogInActivity.this, "Wrong, try agin", Toast.LENGTH_SHORT).show();
+                try{
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        String emailUser = snapshot1.child("email").getValue(String.class);
+                        if (emailUser.equals(email)) {
+                            logInUser(email, password);
+                        } else {
+                    throw new InvalidLoginException();                        }
                     }
+                }catch (InvalidLoginException e ){
+                    Toast.makeText(LogInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
+
             }
 
             @Override

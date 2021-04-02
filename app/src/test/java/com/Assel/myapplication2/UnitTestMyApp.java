@@ -11,7 +11,7 @@ public class UnitTestMyApp {
 
     @Test
     public void loginTest_1() throws InterruptedException {
-        LogInTest.logIn(
+        LogInTest.logIn2(
                 "aseelww@gmail.com",
                 "Aseel#123");
         latch.await(5, TimeUnit.SECONDS);
@@ -20,7 +20,7 @@ public class UnitTestMyApp {
 
     @Test
     public void loginTest_2() throws InterruptedException {
-        LogInTest.logIn(
+        LogInTest.logIn2(
                 "demo",
                 "1");
 
@@ -30,7 +30,7 @@ public class UnitTestMyApp {
 
     @Test
     public void getDataTest_1() throws InterruptedException {
-        GetData.getData("aseelww@gmail.com");
+        GetData.getData2("aseelww@gmail.com");
         latch.await(5, TimeUnit.SECONDS);
         Assert.assertTrue(GetData.getStatus);
 
@@ -38,7 +38,7 @@ public class UnitTestMyApp {
 
     @Test
     public void getDataTest_2() throws InterruptedException {
-        GetData.getData("");
+        GetData.getData2("");
         latch.await(5, TimeUnit.SECONDS);
         Assert.assertTrue(GetData.getStatus);
 
